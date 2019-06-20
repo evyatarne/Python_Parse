@@ -8,11 +8,14 @@ file = None
 
 print("Program started")
 
-def open_file(file, filePath, mode):
+def parse_file(file, filePath, mode):
     file = open(filePath, mode)
 
     line = file.readline()
-    pid = re.search("\s*\d{3,}\s", line, flags=0).group()
-    print("PID:" +  pid)
+    pid = extract_pid(line)
+    print("PID: " + pid)
 
-open_file(file, filePath, "r")
+def extract_pid(line):
+    return re.search("\s*\d{3,}\s", line, flags=0).group().strip()
+
+parse_file(file, filePath, "r")
