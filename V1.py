@@ -4,18 +4,22 @@
 import re
 
 filePath = "C:\\Users\\danielle\\Desktop\\vpnd.elg"
-file = None
 
 print("Program started")
 
-def parse_file(file, filePath, mode):
-    file = open(filePath, mode)
+def parse_file(filePath, mode):
+    with open(filePath, mode) as f:
+        #line = f.readline()
+        for i, line in enumerate(f):
+            pid = extract_pid(line)
+            print("PID: " + pid)
 
-    line = file.readline()
-    pid = extract_pid(line)
-    print("PID: " + pid)
+
+
+
+    f.close()
 
 def extract_pid(line):
     return re.search("\s*\d{3,}\s", line, flags=0).group().strip()
 
-parse_file(file, filePath, "r")
+parse_file(filePath, "r")
