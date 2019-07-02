@@ -18,10 +18,20 @@ def parse_file(filePath, mode):
 
 
 # Gets the pid from the line
+# Assuming pid is not more than 6 characters
 def extract_pid(line):
     pid = re.search("\\s*\\d{3,}\\s", line, flags=0)
     if pid is not None:
-        return pid.group().strip()
+        if count_characters(pid.group().strip()) <= 6:
+            return pid.group().strip()
+
+
+# Returns the number of characters in a string
+def count_characters(string):
+    count = 0
+    for c in string:
+        count += 1
+    return count
 
 
 parse_file(filePath, "r")
