@@ -16,12 +16,9 @@ def parse_file(filePath, mode):
             print("PID: " + pid)
 
 
-
-
-    f.close()
-
 #Gets the pid from the line
 def extract_pid(line):
     return re.search("\s*\d{3,}\s", line, flags=0).group().strip()
+
 
 parse_file(filePath, "r")
